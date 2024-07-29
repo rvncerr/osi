@@ -1,1 +1,1 @@
-module osi
+module github.com/rvncerr/osi
