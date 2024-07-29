@@ -3,8 +3,73 @@ package osi
 import (
 	"io/fs"
 	"os"
+	"syscall"
 	"time"
 )
+
+const (
+	O_RDONLY int = syscall.O_RDONLY
+	O_WRONLY int = syscall.O_WRONLY
+	O_RDWR   int = syscall.O_RDWR
+	O_APPEND int = syscall.O_APPEND
+	O_CREATE int = syscall.O_CREAT
+	O_EXCL   int = syscall.O_EXCL
+	O_SYNC   int = syscall.O_SYNC
+	O_TRUNC  int = syscall.O_TRUNC
+)
+
+const (
+	SEEK_SET int = 0
+	SEEK_CUR int = 1
+	SEEK_END int = 2
+)
+
+const (
+	PathSeparator     = os.PathSeparator
+	PathListSeparator = os.PathListSeparator
+)
+
+const (
+	ModeDir        = fs.ModeDir
+	ModeAppend     = fs.ModeAppend
+	ModeExclusive  = fs.ModeExclusive
+	ModeTemporary  = fs.ModeTemporary
+	ModeSymlink    = fs.ModeSymlink
+	ModeDevice     = fs.ModeDevice
+	ModeNamedPipe  = fs.ModeNamedPipe
+	ModeSocket     = fs.ModeSocket
+	ModeSetuid     = fs.ModeSetuid
+	ModeSetgid     = fs.ModeSetgid
+	ModeCharDevice = fs.ModeCharDevice
+	ModeSticky     = fs.ModeSticky
+	ModeIrregular  = fs.ModeIrregular
+	ModeType       = fs.ModeType
+	ModePerm       = fs.ModePerm
+)
+
+const DevNull = os.DevNull
+
+var (
+	ErrInvalid = fs.ErrInvalid
+
+	ErrPermission = fs.ErrPermission
+	ErrExist      = fs.ErrExist
+	ErrNotExist   = fs.ErrNotExist
+	ErrClosed     = fs.ErrClosed
+
+	ErrNoDeadline       = os.ErrNoDeadline
+	ErrDeadlineExceeded = os.ErrDeadlineExceeded
+)
+
+var (
+	Stdin  = NewFile(uintptr(syscall.Stdin), "/dev/stdin")
+	Stdout = NewFile(uintptr(syscall.Stdout), "/dev/stdout")
+	Stderr = NewFile(uintptr(syscall.Stderr), "/dev/stderr")
+)
+
+var Args []string = os.Args
+
+var ErrProcessDone = os.ErrProcessDone
 
 func Chdir(path string) error {
 	return os.Chdir(path)
